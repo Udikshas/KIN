@@ -1,0 +1,94 @@
+@import "tailwindcss";
+
+/*
+  Kin design tokens — based on the Refero "ElevenLabs" style:
+  warm achromatic editorial on eggshell paper, black ink, light display type,
+  pill buttons, hairline borders. Violet and ember appear only inside product
+  visuals (the call sphere, charts). Green / amber / red are status only.
+*/
+@theme {
+  --color-eggshell: #fdfcfc;
+  --color-taupe: #f5f3f1;
+  --color-stone: #ebe8e4;
+  --color-ink: #000000;
+  --color-graphite: #44403b;
+  --color-smoke: #777169;
+  --color-ash: #a59f97;
+  --color-hairline: #e5e5e5;
+
+  --color-violet: #0447ff;
+  --color-ember: #ff4704;
+
+  --color-ok: #2f7d4f;
+  --color-ok-soft: #e7f1ea;
+  --color-watch: #b26a00;
+  --color-watch-soft: #fbefdc;
+  --color-alert: #c0392b;
+  --color-alert-soft: #f8e3e0;
+
+  --radius-card: 20px;
+  --radius-panel: 24px;
+
+  --shadow-lift: 0 0 0 1px rgb(0 0 0 / 0.06), 0 1px 2px rgb(0 0 0 / 0.04),
+    0 12px 32px -16px rgb(0 0 0 / 0.08);
+
+  --animate-breathe: breathe 2.4s ease-in-out infinite;
+  --animate-drift: drift 9s linear infinite;
+
+  @keyframes breathe {
+    0%,
+    100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.05);
+    }
+  }
+  @keyframes drift {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+}
+
+@theme inline {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, "SFMono-Regular", monospace;
+  --font-deva: var(--font-noto-deva), var(--font-inter), sans-serif;
+  --font-tamil: var(--font-noto-tamil), var(--font-inter), sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-eggshell);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  letter-spacing: 0.005em;
+}
+
+h1,
+h2,
+h3 {
+  text-wrap: balance;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-ink);
+  outline-offset: 3px;
+  border-radius: 9999px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}

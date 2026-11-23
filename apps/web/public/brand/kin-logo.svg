@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 132 40" fill="none">
+  <rect width="40" height="40" rx="11" fill="#1f2025"/>
+  <circle cx="13.75" cy="20" r="3.75" fill="#fff"/>
+  <path d="M20.6 13.4a8.75 8.75 0 0 1 0 13.2" stroke="#fff" stroke-width="2.8" stroke-linecap="round"/>
+  <path d="M25.9 9.4a14 14 0 0 1 0 21.2" stroke="#fff" stroke-opacity=".55" stroke-width="2.8" stroke-linecap="round"/>
+  <text x="52" y="29" font-family="Inter, -apple-system, sans-serif" font-size="27" font-weight="600" letter-spacing="-1" fill="#222326">Kin</text>
+</svg>

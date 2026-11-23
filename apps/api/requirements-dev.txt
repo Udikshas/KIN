@@ -1,0 +1,6 @@
+# Local scripts (place_call.py, sarvam_hello.py) and the tests. Not installed in the Docker image.
+-r requirements.txt
+sarvamai==0.1.36
+# Tests: pytest, and pgserver for a throwaway local Postgres (see tests/conftest.py).
+pytest==8.3.5
+pgserver==0.1.4

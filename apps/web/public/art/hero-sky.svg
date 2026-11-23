@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#d9e5f6"/>
+      <stop offset=".45" stop-color="#eef3fa"/>
+      <stop offset="1" stop-color="#ffffff"/>
+    </linearGradient>
+    <filter id="soft" x="-20%" y="-50%" width="140%" height="200%">
+      <feGaussianBlur stdDeviation="38"/>
+    </filter>
+    <filter id="cloud" x="-20%" y="-50%" width="140%" height="200%">
+      <feGaussianBlur stdDeviation="60"/>
+    </filter>
+  </defs>
+  <rect width="1600" height="1000" fill="url(#sky)"/>
+  <g filter="url(#cloud)" opacity=".9">
+    <ellipse cx="180" cy="160" rx="320" ry="90" fill="#ffffff"/>
+    <ellipse cx="1420" cy="120" rx="340" ry="100" fill="#ffffff"/>
+    <ellipse cx="820" cy="40" rx="420" ry="70" fill="#ffffff" opacity=".7"/>
+  </g>
+  <g filter="url(#soft)">
+    <path d="M-100 700 C 300 560, 600 640, 800 620 S 1300 560, 1700 690 L1700 760 C 1300 640, 1000 690, 800 690 S 300 640, -100 780 Z" fill="#b9a6ff" opacity=".55"/>
+    <path d="M-100 740 C 300 630, 600 700, 800 685 S 1300 630, 1700 740 L1700 800 C 1300 700, 1000 745, 800 745 S 300 700, -100 820 Z" fill="#ffab94" opacity=".55"/>
+    <path d="M-100 780 C 300 690, 600 750, 800 735 S 1300 690, 1700 785 L1700 830 C 1300 750, 1000 790, 800 790 S 300 750, -100 850 Z" fill="#ffca00" opacity=".35"/>
+    <path d="M-100 810 C 300 730, 600 790, 800 775 S 1300 730, 1700 815 L1700 860 C 1300 790, 1000 825, 800 825 S 300 790, -100 880 Z" fill="#31ce01" opacity=".18"/>
+    <path d="M-100 840 C 300 770, 600 820, 800 810 S 1300 770, 1700 845 L1700 900 C 1300 830, 1000 860, 800 860 S 300 830, -100 910 Z" fill="#415eee" opacity=".22"/>
+  </g>
+  <rect y="860" width="1600" height="140" fill="#ffffff" filter="url(#soft)"/>
+</svg>

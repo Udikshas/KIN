@@ -1,0 +1,435 @@
+<title>Kin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600&family=Newsreader:ital,opsz,wght@1,6..72,300;1,6..72,400&family=Geist+Mono:wght@400;500&family=Noto+Sans+Devanagari:wght@400;500&display=swap">
+<style>
+/* Layout: warm editorial paper, one centred 1200px column, asymmetric hero (copy left, live call right),
+   alternating paper / band sections, black pill buttons. Marigold lives only in product visuals. */
+:root{
+  --paper:#fbfaf7; --band:#f3f0ea; --card:#ffffff; --line:#e6e1d8;
+  --ink:#16140f; --ink-2:#3f3a33; --muted:#756d62; --faint:#a39a8d;
+  --marigold:#e9a21a; --marigold-soft:#f6dca4;
+  --green:#2e8456; --amber:#c98200; --red:#c2412f;
+  --green-bg:#e6f2ea; --amber-bg:#fbf0d9; --red-bg:#f8e4e0;
+  --btn-bg:#16140f; --btn-fg:#fbfaf7;
+  --display:"Hanken Grotesk", "Helvetica Neue", Arial, sans-serif;
+  --body:"Hanken Grotesk", "Helvetica Neue", Arial, sans-serif;
+  --serif:"Newsreader", Georgia, "Times New Roman", serif;
+  --mono:"Geist Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --deva:"Noto Sans Devanagari", "Hanken Grotesk", sans-serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#12110e; --band:#1a1915; --card:#201e1a; --line:#2f2c26;
+    --ink:#f3efe7; --ink-2:#d6d0c5; --muted:#a59d90; --faint:#7a7368;
+    --marigold:#f0b13a; --marigold-soft:#5a4417;
+    --green:#5fbf8a; --amber:#e8a93a; --red:#ec7a66;
+    --green-bg:#17291f; --amber-bg:#2e2412; --red-bg:#331b17;
+    --btn-bg:#f3efe7; --btn-fg:#12110e;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#12110e; --band:#1a1915; --card:#201e1a; --line:#2f2c26;
+  --ink:#f3efe7; --ink-2:#d6d0c5; --muted:#a59d90; --faint:#7a7368;
+  --marigold:#f0b13a; --marigold-soft:#5a4417;
+  --green:#5fbf8a; --amber:#e8a93a; --red:#ec7a66;
+  --green-bg:#17291f; --amber-bg:#2e2412; --red-bg:#331b17;
+  --btn-bg:#f3efe7; --btn-fg:#12110e;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1200px;margin:0 auto;padding-inline:clamp(16px,4vw,48px)}
+h1,h2,h3{font-family:var(--display);font-weight:300;letter-spacing:-0.025em;text-wrap:balance;margin:0}
+h1{font-size:clamp(40px,6vw,72px);line-height:1.02}
+h2{font-size:clamp(30px,4vw,48px);line-height:1.08}
+h3{font-size:20px;font-weight:500;letter-spacing:-0.01em}
+p{margin:0}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.lede{font-size:clamp(18px,1.6vw,20px);color:var(--ink-2);max-width:34em}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--marigold);outline-offset:3px;border-radius:6px}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;gap:8px;border-radius:999px;padding:12px 22px;font:500 15px/1 var(--body);text-decoration:none;border:1px solid var(--ink);cursor:pointer;transition:transform .15s ease, background .15s ease}
+.btn-fill{background:var(--btn-bg);color:var(--btn-fg);border-color:var(--btn-bg)}
+.btn-line{background:transparent;color:var(--ink);border-color:var(--line)}
+.btn:hover{transform:translateY(-1px)}
+.btn-line:hover{border-color:var(--ink)}
+
+/* nav */
+nav.top{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:20px}
+.mark{font-family:var(--display);font-size:28px;font-weight:500;letter-spacing:-0.04em;text-decoration:none;display:inline-flex;align-items:baseline;gap:2px}
+.mark i{width:8px;height:8px;border-radius:50%;background:var(--marigold);display:inline-block;transform:translateY(-2px)}
+.navlinks{display:flex;gap:28px;font-size:15px;color:var(--ink-2)}
+.navlinks a{text-decoration:none}
+.navlinks a:hover{color:var(--ink)}
+.navcta{display:flex;gap:10px}
+@media (max-width:860px){.navlinks{display:none}}
+@media (max-width:480px){.navcta .btn-line{display:none}}
+
+/* hero */
+.hero{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(32px,5vw,72px);align-items:center;padding-block:clamp(32px,6vw,80px) clamp(56px,8vw,112px)}
+.hero > *{min-width:0}
+.hero-copy{display:flex;flex-direction:column;gap:28px}
+.hero h1 em{font-family:var(--serif);font-style:italic;font-weight:300;letter-spacing:-0.01em}
+.langs{display:flex;flex-wrap:wrap;gap:8px}
+.lang{border:1px solid var(--line);border-radius:999px;padding:6px 14px;font-size:15px;color:var(--ink-2);background:var(--card)}
+.lang small{font-family:var(--mono);font-size:11px;color:var(--faint);margin-left:6px;letter-spacing:.04em}
+.ctas{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.fine{font-size:14px;color:var(--muted)}
+@media (max-width:920px){.hero{grid-template-columns:1fr}}
+
+/* live call card */
+.call{background:var(--band);border-radius:24px;padding:24px;display:flex;flex-direction:column;gap:20px}
+.call-head{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.who{display:flex;align-items:center;gap:12px}
+.orb{width:52px;height:52px;border-radius:50%;flex:none;background:radial-gradient(circle at 35% 35%, var(--marigold-soft), var(--marigold) 55%, var(--green) 120%);box-shadow:0 0 0 6px color-mix(in srgb, var(--marigold) 14%, transparent)}
+.call.playing .orb{animation:breathe 1.6s ease-in-out infinite}
+@keyframes breathe{50%{box-shadow:0 0 0 14px color-mix(in srgb, var(--marigold) 6%, transparent);transform:scale(1.04)}}
+.who b{display:block;font-weight:500}
+.who span{font-family:var(--mono);font-size:12px;color:var(--muted)}
+.replay{background:var(--card);border:1px solid var(--line);border-radius:999px;padding:8px 14px;font:500 14px/1 var(--body);color:var(--ink);cursor:pointer;display:inline-flex;gap:8px;align-items:center}
+.replay:hover{border-color:var(--ink)}
+.wave{display:flex;gap:3px;align-items:center;height:28px}
+.wave i{width:3px;border-radius:2px;background:var(--ink-2);opacity:.35;height:30%}
+.call.playing .wave i{animation:bar 1s ease-in-out infinite}
+@keyframes bar{50%{height:100%;opacity:.8}}
+.lines{display:flex;flex-direction:column;gap:12px;margin:0;padding:0;list-style:none}
+.line{display:flex;flex-direction:column;gap:2px;max-width:88%;padding:12px 14px;border-radius:16px;transition:opacity .4s ease, transform .4s ease}
+.line.kin{background:var(--card);align-self:flex-start;border-bottom-left-radius:6px}
+.line.amma{background:color-mix(in srgb, var(--marigold) 16%, var(--band));align-self:flex-end;border-bottom-right-radius:6px}
+.line .say{font-family:var(--deva);font-size:16px;line-height:1.5}
+.line .tr{font-size:13px;color:var(--muted)}
+.line.pending{opacity:.18;transform:translateY(4px)}
+.note{display:flex;gap:10px;align-items:flex-start;font-size:14px;color:var(--ink-2);border-top:1px solid var(--line);padding-top:16px}
+.dot{width:10px;height:10px;border-radius:50%;flex:none;margin-top:6px}
+.dot.g{background:var(--green)} .dot.a{background:var(--amber)} .dot.r{background:var(--red)}
+
+/* sections */
+section.s{padding-block:clamp(64px,9vw,120px)}
+section.band{background:var(--band)}
+.s-head{display:flex;flex-direction:column;gap:16px;max-width:760px;margin-bottom:clamp(36px,5vw,56px)}
+
+/* "I am fine" vs card */
+.fine-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,6vw,96px);align-items:center}
+.fine-grid > *{min-width:0}
+.quote{font-family:var(--serif);font-style:italic;font-weight:300;font-size:clamp(56px,9vw,120px);line-height:.95;letter-spacing:-0.02em;color:var(--ink)}
+.quote-cap{margin-top:24px;max-width:28em;color:var(--ink-2)}
+.ecard{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:28px;display:flex;flex-direction:column;gap:18px;box-shadow:0 1px 0 var(--line), 0 18px 40px -24px rgba(22,20,15,.18)}
+.ecard-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap}
+.ecard-top h3{font-size:22px}
+.ecard-top span{font-family:var(--mono);font-size:12px;color:var(--muted)}
+.pill{display:inline-flex;align-items:center;gap:8px;border-radius:999px;padding:6px 12px;font-size:13px;font-weight:500}
+.pill.g{background:var(--green-bg);color:var(--green)}
+.pill.a{background:var(--amber-bg);color:var(--amber)}
+.pill.r{background:var(--red-bg);color:var(--red)}
+.pill .dot{margin-top:0;width:8px;height:8px}
+.rows{display:flex;flex-direction:column}
+.row{display:grid;grid-template-columns:110px 1fr;gap:16px;padding-block:12px;border-top:1px solid var(--line);font-size:15px}
+.row dt{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);padding-top:3px}
+.row dd{margin:0;color:var(--ink)}
+.row dd small{display:block;color:var(--muted);font-size:13px}
+.row.watch dd{color:var(--amber);font-weight:500}
+.ecard-foot{font-family:var(--serif);font-style:italic;font-size:18px;color:var(--ink-2)}
+@media (max-width:860px){.fine-grid{grid-template-columns:1fr}}
+@media (max-width:420px){.row{grid-template-columns:1fr;gap:4px}}
+
+/* how it works */
+.steps{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;margin:0;padding:0;list-style:none;counter-reset:step}
+.steps li{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:24px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.steps li::before{counter-increment:step;content:counter(step);font-family:var(--mono);font-size:12px;color:var(--muted);border:1px solid var(--line);border-radius:999px;width:28px;height:28px;display:grid;place-items:center}
+.steps p{font-size:15px;color:var(--ink-2)}
+.steps q{font-family:var(--serif);font-style:italic;font-size:16px;color:var(--ink)}
+@media (max-width:1060px){.steps{grid-template-columns:repeat(2,1fr)}.steps li:last-child{grid-column:1/-1}}
+@media (max-width:560px){.steps{grid-template-columns:1fr}}
+
+/* sensor */
+.sensor{display:grid;grid-template-columns:1fr 1.15fr;gap:clamp(32px,5vw,72px);align-items:start}
+.sensor > *{min-width:0}
+.signals{display:flex;flex-direction:column}
+.signal{display:grid;grid-template-columns:180px 1fr;gap:16px;padding-block:20px;border-top:1px solid var(--line)}
+.signal:last-child{border-bottom:1px solid var(--line)}
+.signal h3{font-size:17px}
+.signal p{color:var(--ink-2);font-size:15px}
+.chart{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:24px;display:flex;flex-direction:column;gap:12px}
+.chart-head{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:baseline}
+.chart-head b{font-weight:500}
+.chart-head span{font-family:var(--mono);font-size:12px;color:var(--muted)}
+.chart svg{width:100%;height:auto;display:block}
+.chart .legend{display:flex;gap:18px;flex-wrap:wrap;font-size:13px;color:var(--muted)}
+.chart .legend i{display:inline-block;width:14px;height:8px;border-radius:2px;margin-right:6px;vertical-align:middle}
+@media (max-width:900px){.sensor{grid-template-columns:1fr}}
+@media (max-width:520px){.signal{grid-template-columns:1fr;gap:6px}}
+
+/* ladder */
+.ladder{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.rung{border-radius:20px;padding:28px;display:flex;flex-direction:column;gap:14px;min-width:0;border:1px solid var(--line);background:var(--card)}
+.rung.g{border-top:4px solid var(--green)}
+.rung.a{border-top:4px solid var(--amber)}
+.rung.r{border-top:4px solid var(--red)}
+.rung h3{font-size:24px;font-weight:400}
+.rung ul{margin:0;padding-left:18px;color:var(--ink-2);font-size:15px;display:flex;flex-direction:column;gap:6px}
+.rung .when{font-family:var(--mono);font-size:12px;color:var(--muted);letter-spacing:.04em}
+@media (max-width:860px){.ladder{grid-template-columns:1fr}}
+
+/* dignity */
+.promises{display:grid;grid-template-columns:repeat(2,1fr);gap:0 clamp(32px,6vw,96px)}
+.promise{padding-block:24px;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:8px;min-width:0}
+.promise p{color:var(--ink-2);font-size:16px}
+@media (max-width:720px){.promises{grid-template-columns:1fr}}
+
+/* plans */
+.plans{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.plan{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:28px;display:flex;flex-direction:column;gap:16px;min-width:0}
+.plan.main{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.plan.main p,.plan.main li{color:color-mix(in srgb, var(--paper) 78%, transparent)}
+.plan.main .btn{background:var(--paper);color:var(--ink);border-color:var(--paper)}
+.price{font-family:var(--display);font-weight:300;font-size:44px;letter-spacing:-0.03em;line-height:1;font-variant-numeric:tabular-nums}
+.price small{font-size:16px;letter-spacing:0;margin-left:4px;opacity:.7}
+.plan ul{margin:0;padding-left:18px;font-size:15px;display:flex;flex-direction:column;gap:6px;color:var(--ink-2)}
+.plan .btn{margin-top:auto;align-self:flex-start}
+@media (max-width:900px){.plans{grid-template-columns:1fr}}
+
+/* footer */
+footer{border-top:1px solid var(--line);padding-block:40px 56px}
+.foot{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;align-items:flex-start}
+.sos{max-width:560px;font-size:15px;color:var(--ink-2)}
+.sos b{color:var(--ink);font-weight:600}
+.foot small{font-family:var(--mono);font-size:12px;color:var(--muted)}
+
+@media (prefers-reduced-motion: reduce){
+  *{animation:none!important;transition:none!important}
+}
+</style>
+
+<div class="wrap">
+  <nav class="top" aria-label="Main">
+    <a class="mark" href="#top" aria-label="Kin home">kin<i></i></a>
+    <div class="navlinks">
+      <a href="#how">How it works</a>
+      <a href="#signals">Signals</a>
+      <a href="#safety">Safety</a>
+      <a href="#plans">Plans</a>
+    </div>
+    <div class="navcta">
+      <a class="btn btn-line" href="#plans">For care centres</a>
+      <a class="btn btn-fill" href="#plans">Start the calls</a>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="hero-copy">
+      <span class="eyebrow">A daily call for parents who live alone</span>
+      <h1>Kin calls your parent every day, <em>in the language they speak at home.</em></h1>
+      <p class="lede">A short phone call each evening. Kin asks how they slept, checks they took their medicine, remembers what they said last week, and sends you one card about what changed.</p>
+      <div class="langs" aria-label="Languages">
+        <span class="lang">हिन्दी<small>HI</small></span>
+        <span class="lang">தமிழ்<small>TA</small></span>
+        <span class="lang">മലയാളം<small>ML</small></span>
+        <span class="lang">বাংলা<small>BN</small></span>
+        <span class="lang">English<small>EN</small></span>
+        <span class="lang">华语<small>ZH</small></span>
+      </div>
+      <div class="ctas">
+        <a class="btn btn-fill" href="#plans">Set up calls for a parent</a>
+        <a class="btn btn-line" href="#how">See how a call works</a>
+      </div>
+      <p class="fine">Works on any phone, landline included. Nothing to install, wear or charge.</p>
+    </div>
+
+    <div class="call" id="call" aria-label="Example call">
+      <div class="call-head">
+        <div class="who">
+          <div class="orb" aria-hidden="true"></div>
+          <div><b>Kin calling Kamala, 74</b><span>Chennai · Thu 9 Oct · 7:10 pm · Hindi</span></div>
+        </div>
+        <div class="wave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        <button class="replay" id="replay" type="button">▶ Replay call</button>
+      </div>
+      <ul class="lines" id="lines">
+        <li class="line kin"><span class="say">नमस्ते अम्मा, मैं किन। आज नींद कैसी आई?</span><span class="tr">Namaste Amma, it's Kin. How did you sleep today?</span></li>
+        <li class="line amma"><span class="say">ठीक थी बेटा… बस घुटने में थोड़ा दर्द है।</span><span class="tr">It was fine… just a little pain in my knee.</span></li>
+        <li class="line kin"><span class="say">कल भी आपने घुटने का बताया था। आज दर्द ज़्यादा है या कम?</span><span class="tr">You mentioned your knee yesterday too. Is it worse or better today?</span></li>
+        <li class="line amma"><span class="say">थोड़ा ज़्यादा।</span><span class="tr">A little worse.</span></li>
+        <li class="line kin"><span class="say">और नाश्ते के बाद सफ़ेद वाली गोली ली?</span><span class="tr">And did you take the white tablet after breakfast?</span></li>
+        <li class="line amma"><span class="say">हाँ, ले ली।</span><span class="tr">Yes, I took it.</span></li>
+        <li class="line kin"><span class="say">बहुत अच्छा। प्रिया ने आपके लिए एक संदेश रिकॉर्ड किया है…</span><span class="tr">Wonderful. Priya recorded a message for you…</span></li>
+      </ul>
+      <div class="note"><span class="dot a" aria-hidden="true"></span><span>Knee pain mentioned 3 days running. Added to Priya's evening card as something to watch.</span></div>
+    </div>
+  </header>
+</div>
+
+<section class="s band" aria-labelledby="fine-h">
+  <div class="wrap fine-grid">
+    <div>
+      <span class="eyebrow" id="fine-h">What you hear on the phone</span>
+      <p class="quote" style="margin-top:20px">“I am fine.”</p>
+      <p class="quote-cap">Every call home gets the same answer. Kin hears the rest, and sends it to you each evening in a card you can read in ten seconds.</p>
+    </div>
+    <article class="ecard" aria-label="Example evening card">
+      <div class="ecard-top">
+        <div><h3>Amma's day</h3><span>Thursday 9 October · call 3 min 40 s</span></div>
+        <span class="pill g"><span class="dot g"></span>Normal day</span>
+      </div>
+      <dl class="rows">
+        <div class="row"><dt>Medicine</dt><dd>2 of 2 taken<small>She confirmed the white tablet after breakfast</small></dd></div>
+        <div class="row"><dt>Sleep</dt><dd>About 6 hours<small>1 hour less than her usual</small></dd></div>
+        <div class="row"><dt>Mood</dt><dd>Cheerful<small>Talked about buying a sari for Diwali</small></dd></div>
+        <div class="row watch"><dt>Watch</dt><dd>Knee pain, third day in a row<small>Worse than yesterday, by her own account</small></dd></div>
+      </dl>
+      <p class="ecard-foot">She asked if you can call on Sunday.</p>
+    </article>
+  </div>
+</section>
+
+<section class="s" id="how" aria-labelledby="how-h">
+  <div class="wrap">
+    <div class="s-head">
+      <span class="eyebrow">How a call works</span>
+      <h2 id="how-h">Two to four minutes, once a day, at the time your parent chooses.</h2>
+    </div>
+    <ol class="steps">
+      <li><h3>Talks</h3><p>Kin calls in the language or dialect they speak at home. The first call opens with a message you recorded, so they know who sent it.</p></li>
+      <li><h3>Checks</h3><p>Pain, sleep, appetite, mood and who visited. Kin compares each answer with what they said last week.</p></li>
+      <li><h3>Reminds</h3><p><q>Amma, did you take the white tablet?</q> Then it confirms she did, instead of only sounding an alarm.</p></li>
+      <li><h3>Remembers</h3><p>For dementia, Kin answers the fortieth question as patiently as the first, and can reply with a voice note you recorded.</p></li>
+      <li><h3>Reports</h3><p>One card reaches the family each evening on WhatsApp or the Kin app. No dashboard to learn.</p></li>
+    </ol>
+  </div>
+</section>
+
+<section class="s band" id="signals" aria-labelledby="sig-h">
+  <div class="wrap">
+    <div class="s-head">
+      <span class="eyebrow">The conversation is the sensor</span>
+      <h2 id="sig-h">Kin compares today with your parent's own last 30 days.</h2>
+      <p class="lede">Not with a population average. A quiet person stays quiet; Kin looks for the change.</p>
+    </div>
+    <div class="sensor">
+      <div class="signals">
+        <div class="signal"><h3>What they say</h3><p>Pain, sleep, appetite, mood, medicine, who came by.</p></div>
+        <div class="signal"><h3>How they say it</h3><p>Pause length, speech rate, word finding, range of vocabulary.</p></div>
+        <div class="signal"><h3>Whether they answer</h3><p>Three missed calls in a row is itself the first warning sign.</p></div>
+      </div>
+      <figure class="chart" style="margin:0">
+        <div class="chart-head"><b>Speech rate, last 30 calls</b><span>Example data · words per minute</span></div>
+        <svg id="spark" viewBox="0 0 560 220" role="img" aria-label="Example chart: speech rate stays inside the usual band for 25 days, then drops below it for the last 5 calls"></svg>
+        <figcaption class="legend"><span><i style="background:color-mix(in srgb, var(--green) 22%, transparent)"></i>Her usual range</span><span><i style="background:var(--amber)"></i>Below range 5 calls running → family alerted</span></figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section class="s" aria-labelledby="ladder-h">
+  <div class="wrap">
+    <div class="s-head">
+      <span class="eyebrow">The escalation ladder</span>
+      <h2 id="ladder-h">Alerts come from trends over days, never from one sentence. Every red goes to a person.</h2>
+    </div>
+    <div class="ladder">
+      <div class="rung g"><span class="pill g"><span class="dot g"></span>Green</span><h3>Kin handles it</h3><span class="when">A normal day</span><ul><li>Reminders and reassurance</li><li>Orientation for memory loss</li><li>Evening card to the family</li></ul></div>
+      <div class="rung a"><span class="pill a"><span class="dot a"></span>Amber</span><h3>Family alerted</h3><span class="when">A trend is forming</span><ul><li>Push alert with the evidence</li><li>Missed doses, worse sleep, slower speech</li><li>Suggested question for your next call</li></ul></div>
+      <div class="rung r"><span class="pill r"><span class="dot r"></span>Red</span><h3>A person joins</h3><span class="when">Concern or no answer</span><ul><li>Family phoned straight away</li><li>Teleconsult opens with a 30-day summary</li><li>Three missed calls in a row</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<section class="s band" id="safety" aria-labelledby="safe-h">
+  <div class="wrap">
+    <div class="s-head">
+      <span class="eyebrow">Dignity and privacy</span>
+      <h2 id="safe-h">Your parent decides what you see.</h2>
+    </div>
+    <div class="promises">
+      <div class="promise"><h3>Summaries, never recordings</h3><p>The family gets a short card. Audio is deleted after processing; no one reads a raw transcript.</p></div>
+      <div class="promise"><h3>They can pause Kin any time</h3><p>Say “not today” and Kin calls tomorrow. Say “stop” and the calls stop.</p></div>
+      <div class="promise"><h3>When Kin isn't sure, it asks</h3><p>If it didn't catch a word, Kin repeats back what it heard. Unclear moments go to a human for review instead of a guess.</p></div>
+      <div class="promise"><h3>A wellbeing check, not a doctor</h3><p>Kin doesn't diagnose or prescribe. It helps the people who do arrive with a clearer picture.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="s" id="plans" aria-labelledby="plans-h">
+  <div class="wrap">
+    <div class="s-head">
+      <span class="eyebrow">Pilot pricing</span>
+      <h2 id="plans-h">Less than a day of paid care, for a month of daily calls.</h2>
+    </div>
+    <div class="plans">
+      <div class="plan main">
+        <h3>Families</h3>
+        <div class="price">₹599<small>/ month</small></div>
+        <p>S$39 a month when you live in Singapore and your parent lives in India.</p>
+        <ul><li>One call a day, in their language</li><li>Evening card on WhatsApp or the app</li><li>Amber and red alerts</li></ul>
+        <a class="btn" href="#top">Set up calls for a parent</a>
+      </div>
+      <div class="plan">
+        <h3>Senior centres and NGOs</h3>
+        <div class="price">Per senior<small>licence</small></div>
+        <p>Extend your staff to every senior on your list, with one console for the whole centre.</p>
+        <ul><li>Bulk onboarding</li><li>Staff alerts and call notes</li><li>Monthly wellbeing reports</li></ul>
+        <a class="btn btn-line" href="#top">Talk to us</a>
+      </div>
+      <div class="plan">
+        <h3>Insurers and health systems</h3>
+        <div class="price">Pilots<small>open</small></div>
+        <p>Catch a decline weeks before it becomes an admission.</p>
+        <ul><li>Consented, anonymised trends</li><li>Teleconsult handoff</li><li>Outcome reporting</li></ul>
+        <a class="btn btn-line" href="#top">Start a pilot</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot">
+    <div>
+      <a class="mark" href="#top" aria-label="Kin home">kin<i></i></a>
+      <p class="fine" style="margin-top:8px">Singapore · India</p>
+    </div>
+    <p class="sos"><b>Kin is not an emergency service.</b> In an emergency call 995 in Singapore or 108 in India.</p>
+    <small>Concept for Singapore India Hackathon 2026</small>
+  </div>
+</footer>
+
+<script>
+(function(){
+  // Example speech-rate series: 25 calls inside the usual band, then 5 below it.
+  var data=[118,121,116,123,119,122,117,120,124,118,121,119,116,122,120,123,118,117,121,119,122,120,118,121,119,108,104,101,99,97];
+  var svg=document.getElementById('spark'); if(!svg) return;
+  var W=560,H=220,L=40,R=16,T=16,B=32, lo=90, hi=130, bandLo=113, bandHi=127;
+  var x=function(i){return L+i*(W-L-R)/(data.length-1)}, y=function(v){return T+(hi-v)*(H-T-B)/(hi-lo)};
+  var ns='http://www.w3.org/2000/svg', el=function(n,a){var e=document.createElementNS(ns,n);for(var k in a)e.setAttribute(k,a[k]);return e};
+  [90,100,110,120,130].forEach(function(v){
+    svg.appendChild(el('line',{x1:L,x2:W-R,y1:y(v),y2:y(v),stroke:'var(--line)','stroke-width':1}));
+    var t=el('text',{x:L-8,y:y(v)+4,'text-anchor':'end','font-size':11,'font-family':'Geist Mono, monospace',fill:'var(--muted)'});t.textContent=v;svg.appendChild(t);
+  });
+  svg.appendChild(el('rect',{x:L,y:y(bandHi),width:W-L-R,height:y(bandLo)-y(bandHi),fill:'color-mix(in srgb, var(--green) 18%, transparent)'}));
+  var pts=data.map(function(v,i){return x(i)+','+y(v)});
+  svg.appendChild(el('polyline',{points:pts.slice(0,26).join(' '),fill:'none',stroke:'var(--ink-2)','stroke-width':2,'stroke-linejoin':'round'}));
+  svg.appendChild(el('polyline',{points:pts.slice(25).join(' '),fill:'none',stroke:'var(--amber)','stroke-width':2.5,'stroke-linejoin':'round'}));
+  data.forEach(function(v,i){ if(i>=25) svg.appendChild(el('circle',{cx:x(i),cy:y(v),r:3.5,fill:'var(--amber)'})); });
+  [['Day 1',0],['Day 15',14],['Day 30',29]].forEach(function(p){
+    var t=el('text',{x:x(p[1]),y:H-8,'text-anchor':p[1]===0?'start':(p[1]===29?'end':'middle'),'font-size':11,'font-family':'Geist Mono, monospace',fill:'var(--muted)'});t.textContent=p[0];svg.appendChild(t);
+  });
+})();
+
+(function(){
+  var call=document.getElementById('call'), btn=document.getElementById('replay');
+  var lines=[].slice.call(document.querySelectorAll('#lines .line'));
+  var timers=[];
+  btn.addEventListener('click',function(){
+    timers.forEach(clearTimeout); timers=[];
+    lines.forEach(function(l){l.classList.add('pending')});
+    call.classList.add('playing'); btn.textContent='● On call';
+    lines.forEach(function(l,i){
+      timers.push(setTimeout(function(){l.classList.remove('pending')}, 500+i*1500));
+    });
+    timers.push(setTimeout(function(){call.classList.remove('playing'); btn.textContent='▶ Replay call'}, 500+lines.length*1500));
+  });
+})();
+</script>

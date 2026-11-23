@@ -1,0 +1,79 @@
+{
+  "expo": {
+    "name": "Kin",
+    "slug": "kin",
+    "version": "1.0",
+    "orientation": "portrait",
+    "icon": "./assets/images/icon.png",
+    "scheme": "kin",
+    "userInterfaceStyle": "light",
+    "ios": {
+      "bundleIdentifier": "in.garcade.kin",
+      "supportsTablet": false,
+      "config": {
+        "usesNonExemptEncryption": false
+      },
+      "requireFullScreen": true
+    },
+    "android": {
+      "package": "in.garcade.kin",
+      "adaptiveIcon": {
+        "backgroundColor": "#1f2025",
+        "foregroundImage": "./assets/images/adaptive-icon.png",
+        "monochromeImage": "./assets/images/monochrome-icon.png"
+      },
+      "blockedPermissions": [
+        "android.permission.RECORD_AUDIO",
+        "android.permission.SYSTEM_ALERT_WINDOW"
+      ]
+    },
+    "web": {
+      "output": "single",
+      "favicon": "./assets/images/favicon.png"
+    },
+    "plugins": [
+      "expo-router",
+      "expo-secure-store",
+      [
+        "expo-notifications",
+        {
+          "color": "#1f2025",
+          "icon": "./assets/images/notification-icon.png"
+        }
+      ],
+      [
+        "expo-splash-screen",
+        {
+          "backgroundColor": "#ebf0f8",
+          "image": "./assets/images/splash-icon.png",
+          "imageWidth": 96
+        }
+      ],
+      [
+        "expo-audio",
+        {
+          "microphonePermission": false,
+          "recordAudioAndroid": false,
+          "enableBackgroundPlayback": false
+        }
+      ]
+    ],
+    "extra": {
+      "apiUrl": "https://api.kin.garcade.in",
+      "router": {
+        "asyncRoutes": {
+          "web": true
+        }
+      },
+      "eas": {
+        "projectId": "a2c475aa-622f-455b-89b1-5b59b66dd949"
+      }
+    },
+    "experiments": {
+      "typedRoutes": true,
+      "reactCompiler": true
+    },
+    "owner": "kin-app-sarvam",
+    "description": "Kin calls your parent every evening in their own language and sends you one card about how they are."
+  }
+}

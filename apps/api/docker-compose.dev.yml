@@ -1,0 +1,33 @@
+# Local dev stack for the API: Postgres + SuperTokens core, nothing shared with prod.
+#   docker compose -f docker-compose.dev.yml up -d
+#   ./scripts/dev.sh            # API on http://localhost:8000 (reads .env, then .env.local)
+# Postgres is on 5433 so it doesn't clash with a Postgres.app on 5432.
+services:
+  postgres:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: kin
+      POSTGRES_PASSWORD: kin
+      POSTGRES_DB: kin
+    ports:
+      - "5433:5432"
+    volumes:
+      - kin-dev-pg:/var/lib/postgresql/data
+      - ./scripts/dev-init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U kin"]
+      interval: 2s
+      retries: 30
+
+  supertokens:
+    image: registry.supertokens.io/supertokens/supertokens-postgresql:12.2
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      POSTGRESQL_CONNECTION_URI: postgresql://kin:kin@postgres:5432/supertokens
+    ports:
+      - "3567:3567"
+
+volumes:
+  kin-dev-pg:

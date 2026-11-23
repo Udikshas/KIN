@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 900" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <filter id="b" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="90"/></filter>
+    <linearGradient id="beam" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffab94" stop-opacity="0"/>
+      <stop offset=".6" stop-color="#ffab94" stop-opacity=".35"/>
+      <stop offset="1" stop-color="#b9a6ff" stop-opacity=".55"/>
+    </linearGradient>
+  </defs>
+  <rect width="1400" height="900" fill="#1f2025"/>
+  <g filter="url(#b)">
+    <path d="M640 0 L760 0 L1000 900 L400 900 Z" fill="url(#beam)"/>
+    <ellipse cx="700" cy="900" rx="520" ry="160" fill="#415eee" opacity=".35"/>
+  </g>
+</svg>
